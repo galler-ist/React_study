@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useState, useRef } from "react";
 // 간단한 회원가입 폼
 
 const Register = () => {
@@ -10,6 +9,8 @@ const Register = () => {
       country:"",
       bio: "",
     });
+
+    const refObj = useRef();
 
     const onChange = (e) => {
       setInput({
