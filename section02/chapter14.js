@@ -30,3 +30,5 @@ async function printData() {
   const data = await getData();
   console.log(data);
 }
+
+printData();
