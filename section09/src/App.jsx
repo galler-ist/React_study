@@ -1,9 +1,12 @@
-import "./App.css";
 import { useState, useRef, useReducer } from "react";
+import "./App.css";
 import Header from "./components/Header";
 import Editor from "./components/Editor";
 import List from "./components/List";
+// import Exam from "./components/Exam";
 
+// mockdata는 app component가 리렌더링 될때마다 재생성 될 필요 없기 때문에
+// component 외부에 선언
 const mockData = [
   {
     id: 0,
@@ -14,13 +17,13 @@ const mockData = [
   {
     id: 1,
     isDone: false,
-    content: "빨래하기",
+    content: "청소하기",
     date: new Date().getTime(),
   },
   {
     id: 2,
     isDone: false,
-    content: "노래하기",
+    content: "빨래하기",
     date: new Date().getTime(),
   },
 ];
@@ -41,10 +44,9 @@ function reducer(state, action) {
 }
 
 function App() {
+  // const [todos, setTodos] = useState(mockData);
   const [todos, dispatch] = useReducer(reducer, mockData);
-  // mockData의 마지막 id를 찾아서 그 값에 +1 한 값을 초기값으로 설정
-  const lastId = mockData[mockData.length - 1].id;
-  const idRef = useRef(lastId + 1);
+  const idRef = useRef(3);
 
   const onCreate = (content) => {
     dispatch({
@@ -59,8 +61,6 @@ function App() {
   };
 
   const onUpdate = (targetId) => {
-    // todos State의 값들 중 targetId와 일치하는 id를 갖는 todo item의 isDone 변경
-    // 인수 : todos 배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
     dispatch({
       type: "UPDATE",
       targetId: targetId,
@@ -68,7 +68,6 @@ function App() {
   };
 
   const onDelete = (targetId) => {
-    // 인수 : todos 배열에서 targetId와 일치하는 id를 갖는 요소만 삭제한 새로운 배열
     dispatch({
       type: "DELETE",
       targetId: targetId,
@@ -77,6 +76,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <Exam /> */}
       <Header />
       <Editor onCreate={onCreate} />
       <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />

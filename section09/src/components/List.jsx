@@ -1,40 +1,31 @@
 import "./List.css";
-import TodoItem from "./TodoItem";
 import { useState } from "react";
-
+import TodoItem from "./TodoItem";
 const List = ({ todos, onUpdate, onDelete }) => {
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("");
 
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
   };
 
-  const onKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      setFilter(search); // Enter를 눌렀을 때만 필터링 상태를 업데이트
-    }
-  };
-
-  const getFilteredData = () => {
-    if (filter === "") {
+  const getFilteredDate = () => {
+    if (search === "") {
       return todos;
     }
+
     return todos.filter((todo) =>
-      todo.content.toLowerCase().includes(filter.toLowerCase())
+      todo.content.toLowerCase().includes(search.toLowerCase())
     );
   };
 
-  const filteredTodos = getFilteredData();
-
+  const filteredTodos = getFilteredDate();
   return (
     <div className="List">
-      <h4>Todo List 🎄</h4>
+      <h4>Todo List 🌱</h4>
       <input
         value={search}
         onChange={onChangeSearch}
-        onKeyDown={onKeyDown}
-        placeholder="검색어를 입력해주세요"
+        placeholder="검색어를 입력하세요"
       />
       <div className="todos_wrapper">
         {filteredTodos.map((todo) => {
