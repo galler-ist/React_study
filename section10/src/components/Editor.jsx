@@ -1,5 +1,6 @@
 import "./Editor.css";
 import { useState, useRef, memo } from "react";
+
 const Editor = ({ onCreate }) => {
   const [content, setContent] = useState("");
   const contentRef = useRef();
@@ -8,13 +9,13 @@ const Editor = ({ onCreate }) => {
     setContent(e.target.value);
   };
 
-  const onKeyDown = (e) => {
+  const onKeydown = (e) => {
     if (e.keyCode === 13) {
-      onSubmit();
+      onsubmit();
     }
   };
 
-  const onSubmit = () => {
+  const onsubmit = () => {
     if (content === "") {
       contentRef.current.focus();
       return;
@@ -22,17 +23,16 @@ const Editor = ({ onCreate }) => {
     onCreate(content);
     setContent("");
   };
-
   return (
     <div className="Editor">
       <input
         ref={contentRef}
         value={content}
-        onKeyDown={onKeyDown}
+        onKeyDown={onKeydown}
         onChange={onChangeContent}
-        placeholder="새로운 Todo... "
+        placeholder="새로운 Todo..."
       />
-      <button onClick={onSubmit}>추가</button>
+      <button onClick={onsubmit}>추가</button>
     </div>
   );
 };
